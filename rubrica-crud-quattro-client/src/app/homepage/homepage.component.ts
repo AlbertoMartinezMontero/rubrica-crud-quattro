@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { Automa } from '../automa/automa';
 import { AddEvent, AnnullaEvent, ConfermaEvent, ModificaEvent, RicercaEvent, RimuoviEvent, SelezionaEvent } from '../automa/eventi';
 import { Automabile } from '../automa/state';
+import { AggiungiState } from '../automa/stati';
+import { ContattoDto } from '../dto/contatto-dto';
+import { ListaContattiDto } from '../dto/lista-contatti-dto';
 import { Contatto } from '../model/contatto';
 
 @Component({
@@ -84,7 +87,14 @@ modifica() {
 }
 
 conferma() {
-  this.automa.next(new ConfermaEvent());
+  // if (this.automa instanceof AggiungiState){
+    let dto: ContattoDto = new ContattoDto();
+    dto.contatto = this.contatto;
+    let oss: Observable <ListaContattiDto> = this.http.post <ListaContattiDto>('http://localhost:8080/conferma', dto);
+    oss.subscribe(c => this.contatti = c.contatti);
+    this.contatto = new Contatto();
+  // } 
+  // this.automa.next(new ConfermaEvent());
 }
 
 annulla() {

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ContatoreDto } from '../dto/contatore-dto';
 
@@ -10,7 +11,7 @@ import { ContatoreDto } from '../dto/contatore-dto';
 })
 export class CountPageComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   totaleContatti = 0;
 
@@ -22,5 +23,4 @@ export class CountPageComponent implements OnInit {
     oss.subscribe(c => this.totaleContatti = c.totaleContatti);
 
   }
-
 }

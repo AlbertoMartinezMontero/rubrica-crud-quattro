@@ -11,7 +11,7 @@
 	<groupId>it.iad2.crudEx1</groupId>
 	<artifactId>crudEx1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>crudEx1</name>
+	<name>rubrica-crud-quattro</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>

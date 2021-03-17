@@ -1,22 +1,22 @@
 package it.iad2.dto4;
 
-import it.iad2.model4.Oggetto;
+import it.iad2.model4.Contatto;
 
-public class OggettoDto {
-    public Oggetto oggetto;
+public class ContattoDto {
+    public Contatto oggetto;
 
-    public OggettoDto() {
+    public ContattoDto() {
     }
 
-    public OggettoDto(Oggetto oggetto) {
+    public ContattoDto(Contatto oggetto) {
         this.oggetto = oggetto;
     }
 
-    public Oggetto getOggetto() {
+    public Contatto getOggetto() {
         return oggetto;
     }
 
-    public void setOggetto(Oggetto oggetto) {
+    public void setOggetto(Contatto oggetto) {
         this.oggetto = oggetto;
     }
 

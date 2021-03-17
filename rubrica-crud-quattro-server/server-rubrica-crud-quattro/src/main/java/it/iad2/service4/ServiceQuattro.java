@@ -1,24 +1,24 @@
 package it.iad2.service4;
 
 import it.iad2.dto4.ContatoreDto;
-import it.iad2.dto4.ListaOggettiDto;
-import it.iad2.dto4.OggettoDto;
-import it.iad2.model4.Oggetto;
+import it.iad2.dto4.ListaContattiDto;
+import it.iad2.dto4.ContattoDto;
+import it.iad2.model4.Contatto;
 
 public interface ServiceQuattro {
 
-    ListaOggettiDto conferma(Oggetto p);
+    ListaContattiDto conferma(Contatto p);
 
-    ListaOggettiDto modifica(Oggetto p);
+    ListaContattiDto modifica(Contatto p);
     // OggettoDto annulla (Oggetto p); Da gestire lato client?
 
-    ListaOggettiDto rimuovi(Oggetto p);
+    ListaContattiDto rimuovi(Contatto p);
 
-    OggettoDto cerca(String s);
+    ContattoDto cerca(String s);
     
-    OggettoDto seleziona(Oggetto p);
+    ContattoDto seleziona(Contatto p);
     
-    ListaOggettiDto aggiornaLista();
+    ListaContattiDto aggiornaLista();
     
     ContatoreDto conta();
     
