@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ContatoreDto } from '../dto/contatore-dto';
 
 @Component({
   selector: 'app-count-page',
@@ -7,13 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CountPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  numeroContatti = 0;
+  totaleContatti = 0;
 
   ngOnInit(): void {
   }
 
-  
+  conta() {
+    let oss:Observable<ContatoreDto> = this.http.get<ContatoreDto>("http://localhost:8080/conta");
+    oss.subscribe(c => this.totaleContatti = c.totaleContatti);
+
+  }
 
 }
