@@ -37,11 +37,11 @@ public class ContollerQuattro {
         return servizio.modifica(dto.getOggetto());
     }
 
-    /*@ResponseBody
+    @ResponseBody
     @RequestMapping("/cerca")
     public ContattoDto cerca(@RequestBody StringaDto dto) {
         return servizio.cerca(dto.getCriterio());
-    }*/
+    }
 
     @ResponseBody
     @RequestMapping("/aggiorna")

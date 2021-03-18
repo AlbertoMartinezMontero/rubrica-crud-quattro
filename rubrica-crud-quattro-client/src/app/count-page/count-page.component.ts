@@ -16,6 +16,7 @@ export class CountPageComponent implements OnInit {
   totaleContatti = 0;
 
   ngOnInit(): void {
+    this.conta();
   }
 
   conta() {

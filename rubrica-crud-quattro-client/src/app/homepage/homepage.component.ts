@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Automa } from '../automa/automa';
 import { AddEvent, AnnullaEvent, ConfermaEvent, ModificaEvent, RicercaEvent, RimuoviEvent, SelezionaEvent } from '../automa/eventi';
 import { Automabile } from '../automa/state';
-import { AggiungiState } from '../automa/stati';
+import { AggiungiState, ModificaState, RimuoviState } from '../automa/stati';
 import { ContattoDto } from '../dto/contatto-dto';
 import { ListaContattiDto } from '../dto/lista-contatti-dto';
 import { Contatto } from '../model/contatto';
@@ -34,7 +34,7 @@ export class HomepageComponent implements Automabile, OnInit {
 
   ngOnInit(): void {
   // TODO: caricare lista prodotti all'inizio
-  //this.aggiorna();
+  this.aggiorna();
   this.automa = new Automa(this);
 }
 
@@ -87,15 +87,30 @@ modifica() {
 }
 
 conferma() {
-  // if (this.automa instanceof AggiungiState){
+  //Creazione di conferma in Aggiungi
+  if (this.automa instanceof AggiungiState){
     let dto: ContattoDto = new ContattoDto();
     dto.contatto = this.contatto;
     let oss: Observable <ListaContattiDto> = this.http.post <ListaContattiDto>('http://localhost:8080/conferma', dto);
     oss.subscribe(c => this.contatti = c.contatti);
     this.contatto = new Contatto();
-  // } 
-  // this.automa.next(new ConfermaEvent());
-}
+  //Creazione di conferma in Rimuovi
+   }  else if (this.automa instanceof RimuoviState) {
+     let dto:ContattoDto = new ContattoDto();
+     dto.contatto = this.contatto;
+     let oss: Observable<ListaContattiDto> = this.http.post<ListaContattiDto>('http://localhost:8080/rimuovi', dto);
+     oss.subscribe(r => this.contatti = r.contatti);
+  //Creazione di conferma in Modifica
+   } else if (this.automa instanceof ModificaState) {
+     let dto: ContattoDto = new ContattoDto();
+     dto.contatto = this.contatto;
+     let oss: Observable<ListaContattiDto> = this.http.post<ListaContattiDto>('http://localhost:8080/modifica', dto);
+     oss.subscribe(m => this.contatti= m.contatti );
+   }
+
+  }
+ 
+
 
 annulla() {
   this.automa.next(new AnnullaEvent());
@@ -104,7 +119,7 @@ annulla() {
 rimuovi() {
   this.automa.next(new RimuoviEvent());
 }
-
+ // this.automa.next(new ConfermaEvent());
 cerca() {
   this.automa.next(new RicercaEvent());
 }
@@ -114,8 +129,8 @@ seleziona(contatto: Contatto) {
 }
 
 aggiorna() {
-  let oss: Observable<Contatto[]> = this.http.get<Contatto[]>('http://localhost:8080/aggiorna');
-  oss.subscribe(r => this.contatti = r);
+  let oss: Observable<ListaContattiDto> = this.http.get<ListaContattiDto>('http://localhost:8080/aggiorna');
+  oss.subscribe(r => this.contatti = this.contatti );
 }
 }
 
